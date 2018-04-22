@@ -1,0 +1,18 @@
+---
+  - name: Nginx setup
+    apt: pkg=nginx state=present update_cache=true
+
+  - name: default copy
+    template: src=default.j2 dest=/etc/nginx/sites-available/default
+
+  - name: host.html copy
+    template: src=host.html.j2 dest=/var/www/html/host.html
+
+  - name: cert crt copy
+    copy: src=cert.pem dest=/etc/ssl/certs/{{certfile}}
+
+  - name: cert key copy
+    copy: src=key.pem dest=/etc/ssl/certs/{{keyfile}}
+
+  - name: restart nginx
+    service: name=nginx state=restarted

@@ -1,0 +1,11 @@
+- name: Install webserver
+  hosts: webserver
+
+  roles:
+    - web
+
+- name: Install appserver
+  hosts: appserver
+
+  roles:
+    - app
