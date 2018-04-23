@@ -1,11 +1,11 @@
 ---
 # user & pwd
 ansible_connection: ssh
-ansible_ssh_user: <user>
-ansible_ssh_pass: <pasword>
+ansible_ssh_user: user
+ansible_ssh_pass: pasword
 ansible_become: yes
 
 app_lb_ip: 10.0.2.100
 
-certfile: iljoongcert.pem
-keyfile: iljoongkey.pem
+certfile: mycert.pem
+keyfile: mykey.pem

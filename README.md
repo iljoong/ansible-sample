@@ -11,19 +11,21 @@ sudo apt install -y ansible
 sudo apt install -y sshpass
 ```
 
+Add all hosts fingerprint to `known_hosts` file by `ssh` to each host.
+
 ### Pingtest
 
-Ping test inventory
+Ping test inventory, using sshkey authentication
 
-- update/add host then run command
+- update *hosts* in `hosts` and run command
 
 ```
 ansible -i hosts all -m ping -u <user>
 ```
 
-For non-sshkey, ping test inventory
+For non-sshkey authentication, ping test inventory
 
-- update *username* and *password* in `hosts.pass` then run command
+- update *hosts*, *ansible_ssh_user* and *ansible_ssh_pass* variables in `hosts.pass`, and run command
 
 ```
 ansible -i hosts.pass all -m ping 
@@ -33,6 +35,10 @@ ansible -i hosts.pass all -m ping
 
 Install nginx+php on webserver
 
+- update *hosts* in `hosts`
+- update *ansible_ssh_user* and *ansible_ssh_pass* variables in `site.yaml` for non-sshkey authentication
+- run command
+
 ```
 ansible-playbook -i hosts site.yaml
 ```
@@ -41,14 +47,18 @@ ansible-playbook -i hosts site.yaml
 
 N-tier Web/App ansible sample to install/config nginx+ssl on webserver and nginx+php on appserver
 
-- update hosts of webserver and appservers
-- add your certificate (`cert.pem` & `key.pem`) files in `roles/web/files`
+- update *hosts* in `hosts` for webservers and appservers
+- update *ansible_ssh_user* and *ansible_ssh_pass* variables in `group_vars/all`
+- update *app_lb_ip* in `group_vars/all`
+- copy your certificate (`cert.pem` & `key.pem`) files in `roles/web/files`
 
 ```
 ansible-playbook -i hosts site.yaml
 ```
 
-To get a free certificate, please visit [letsencrtyp](https://letsencrypt.org/)
+This sample assumes you have a Ntier environment. To setup the enviroment, please refer [terraform sample](https://github.com/iljoong/azure-terraform).
+
+You also need a certificate to perform this sample and to get a free certificate, please visit [letsencrtyp](https://letsencrypt.org/).
 
 ## Reference
 
