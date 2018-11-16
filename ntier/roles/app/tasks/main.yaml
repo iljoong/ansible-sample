@@ -5,11 +5,17 @@
 - name: Php setup
   apt: pkg=php7.0-fpm state=present
 
+- name: Jq setup
+  apt: pkg=jq state=present
+  
 - name: index.html copy
   template: src=index.html.j2 dest=/var/www/html/index.html
 
 - name: host.php copy
   template: src=host.php.j2 dest=/var/www/html/host.php
+
+- name: hello.php copy
+  template: src=hello.php.j2 dest=/var/www/html/hello.php
 
 - name: default copy
   template: src=default.j2 dest=/etc/nginx/sites-available/default

@@ -6,6 +6,4 @@ ansible_ssh_pass: pasword
 ansible_become: yes
 
 app_lb_ip: 10.0.2.100
-
-certfile: mycert.pem
-keyfile: mykey.pem
+blob_name: blobacct

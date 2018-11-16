@@ -7,6 +7,7 @@ Sample ansible scripts for Azure
 Install [ansible](https://www.ansible.com/). If you're using password instead of sshkey you need to install `sshpass` too.
 
 ```
+sudo apt update
 sudo apt install -y ansible
 sudo apt install -y sshpass
 ```
@@ -20,7 +21,7 @@ Ping test inventory, using sshkey authentication
 - update *hosts* in `hosts` and run command
 
 ```
-ansible -i hosts all -m ping -u <user>
+ansible -i hosts all -m ping -u <user> [--ask-pass]
 ```
 
 For non-sshkey authentication, ping test inventory
@@ -49,16 +50,13 @@ N-tier Web/App ansible sample to install/config nginx+ssl on webserver and nginx
 
 - update *hosts* in `hosts` for webservers and appservers
 - update *ansible_ssh_user* and *ansible_ssh_pass* variables in `group_vars/all`
-- update *app_lb_ip* in `group_vars/all`
-- copy your certificate (`cert.pem` & `key.pem`) files in `roles/web/files`
+- update *app_lb_ip* and *blob_name* in `group_vars/all`
 
 ```
 ansible-playbook -i hosts site.yaml
 ```
 
 This sample assumes you have a Ntier environment. To setup the enviroment, please refer [terraform sample](https://github.com/iljoong/azure-terraform).
-
-You also need a certificate to perform this sample and to get a free certificate, please visit [letsencrtyp](https://letsencrypt.org/).
 
 ## Reference
 

@@ -8,11 +8,5 @@
   - name: host.html copy
     template: src=host.html.j2 dest=/var/www/html/host.html
 
-  - name: cert crt copy
-    copy: src=cert.pem dest=/etc/ssl/certs/{{certfile}}
-
-  - name: cert key copy
-    copy: src=key.pem dest=/etc/ssl/certs/{{keyfile}}
-
   - name: restart nginx
     service: name=nginx state=restarted

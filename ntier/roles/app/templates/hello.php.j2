@@ -1,0 +1,11 @@
+<html>
+<body>
+<?php
+        $output = shell_exec("curl -H 'Metadata:true' -s 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://storage.azure.com/' | jq -r '.access_token'");
+        echo "Token: <pre>$output</pre>";
+        echo "<p>";
+        $res = shell_exec("curl https://{{blob_name}}.blob.core.windows.net/docs/hello.txt -H 'x-ms-version: 2017-11-09' -H 'Authorization: Bearer $output'");
+        echo "Text: <pre>$res</pre>";
+?>
+</body>
+</html>
